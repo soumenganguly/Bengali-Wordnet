@@ -1,4 +1,9 @@
 import Tkinter as tk
+import MySQLdb
+
+db=MySQLdb.connect("localhost","zephyr","zephyr","bnwordnet")
+c=db.cursor()
+
 
 class KeyBoard:
   def __init__(self,master):
@@ -559,9 +564,10 @@ class Wordnet_bn:
     redisp_button.pack(side='right')
  
   def show_text(self,event):
-    
     t=self.search.get()
-    self.text_area.insert('end',t)
+    c.execute("""select meaning from dict where words=%s""",(t))
+    f=c.fetchone()
+    self.text_area.insert('end',f)
   
   def Key(self):
     key_root=tk.Tk()
