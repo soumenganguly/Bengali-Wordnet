@@ -1,7 +1,7 @@
 import Tkinter as tk
 import MySQLdb
 
-db=MySQLdb.connect("localhost","zephyr","zephyr","bnwordnet")
+db=MySQLdb.connect("localhost","soumen","soumen","bnwordnet")
 c=db.cursor()
 
 
@@ -565,7 +565,7 @@ class Wordnet_bn:
  
   def show_text(self,event):
     t=self.search.get()
-    c.execute("""select meaning from dict where words=%s""",(t))
+    c.execute("select meaning from words where text='%s'"%t)
     f=c.fetchone()
     self.text_area.insert('end',f)
   
